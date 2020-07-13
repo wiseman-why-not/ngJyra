@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "jyra-app": {
+      "hosting": {
+        "ngJyra-app": [
+          "jyra-app"
+        ]
+      }
+    }
+  }
+}
