@@ -1,11 +1,19 @@
 <main>
+
   <!-- If user is NOT logged in  -->
+  <!-- Google Login -->
   <div *ngIf="!(afAuth.authState | async)">
     <h1>Login</h1>
     <button mat-raised-button appGoogleSignin>
       <i class="material-icons">login</i>
       Login with Google
     </button>
+    <br>
+    <br>
+    <h4>OR</h4>
+
+  <app-email-login></app-email-login>
+
   </div>
 
   <!-- If user IS logged in -->
@@ -15,4 +23,7 @@
 
     <button mat-stroked-button (click)="afAuth.signOut()">Logout</button>
   </div>
+  <br>
+
+
 </main>
