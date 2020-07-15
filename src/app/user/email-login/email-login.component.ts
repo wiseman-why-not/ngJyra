@@ -12,6 +12,7 @@ export class EmailLoginComponent implements OnInit {
 
   form: FormGroup;
   type: 'login' | 'signup' | 'reset' = 'signup';
+  loading = false;
   serverMessage: string;
 
   constructor(private afAuth: AngularFireAuth, private fb: FormBuilder) { }
@@ -62,7 +63,26 @@ export class EmailLoginComponent implements OnInit {
   }
 
   async onSubmit() {
+    this.loading = true;
+    const email = this.email.value;
+    const password = this.password.value;
 
+    try {
+      if (this.isLogin) {
+        await this.afAuth.signInWithEmailAndPassword(email, password);
+      }
+      if (this.isSignup) {
+        await this.afAuth.createUserWithEmailAndPassword(email, password);
+      }
+      if (this.isPasswordReset) {
+        await this.afAuth.sendPasswordResetEmail(email);
+        this.serverMessage = 'Check your email';
+      }
+    } catch (err) {
+      this.serverMessage = err;
+    }
+
+    this.loading = false;
   }
 
 }
